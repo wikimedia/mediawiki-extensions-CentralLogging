@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * Our class to handle log entries
+ * Extends a normal log entry for
+ * all other functionality
+ *
+ * @author Kunal Mehta
+ */
+
+class CentralLogEntry extends ManualLogEntry {
+
+	/**
+	 * @var bool
+	 */
+	protected $shouldWePublish;
+
+	/**
+	 * @var string
+	 */
+	protected $publishTo;
+
+	/**
+	 * Constructor function
+	 *
+	 * @param string $type
+	 * @param string $subtype
+	 */
+	function __construct( $type, $subtype ) {
+		parent::__construct( $type, $subtype );
+	}
+
+	/**
+	 * Queues the log entry into the job queue. If the central wiki is
+	 * the same as our current wiki, we will insert the log entry normally
+	 * @param string $dbname Database name to insert into, will fallback on $wgCentralWiki if not set
+	 * @param bool $publish Whether to call ManualLogEntry::publish afterwards
+	 * @param string $to The $to parameter in ManualLogEntry::publish
+	 * @return int
+	 */
+	function queue( $dbname = null, $publish = true, $to = 'rcandudp' ) {
+		global $wgCentralWiki, $wgDBname;
+		if ( $dbname == null ) {
+			$dbname = $wgCentralWiki;
+		}
+		// Make sure our dbname is stored in the log entry so we can use it when displaying
+		$this->parameters['dbname'] = $wgDBname;
+
+		if ( $wgDBname == $wgCentralWiki ) { // If we're on the central wiki, just log it normally
+			$logid = parent::insert();
+			if ( $publish ) {
+				$this->publish( $logid, $to );
+			}
+			return $logid;
+		}
+
+		$this->shouldWePublish = $publish;
+		$this->publishTo = $to;
+		$this->setTimestamp( wfTimestampNow() ); // Job queue might be delayed so set the TS now
+		$params = array( 'data' => $this );
+		$job = new CentralLogJob( $this->getTarget(), $params );
+		JobQueueGroup::singleton( $dbname )->push( $job );
+		return 0; // Better than nothing?
+	}
+
+	function shouldWePublishEntry() {
+		return $this->shouldWePublish;
+	}
+
+	function publishEntryTo() {
+		return $this->publishTo;
+	}
+}
+
