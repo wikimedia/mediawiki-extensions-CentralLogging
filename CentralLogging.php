@@ -6,6 +6,7 @@
  * See README for usage instructions
  *
  * @author Kunal Mehta <legoktm@gmail.com>
+ * @license MIT License
  */
 
 /**
