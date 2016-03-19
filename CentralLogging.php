@@ -30,4 +30,4 @@ $wgAutoloadClasses['CentralLogEntry'] = __DIR__ . '/CentralLogEntry.php';
 $wgAutoloadClasses['CentralLogFormatter'] = __DIR__ . '/CentralLogFormatter.php';
 $wgAutoloadClasses['CentralLogJob'] = __DIR__ . '/CentralLogJob.php';
 $wgJobClasses['centrallogJob'] = 'CentralLogJob';
-$wgExtensionMessagesFiles['CentralLogging'] = __DIR__ . '/CentralLogging.i18n.php';
+$wgMessagesDirs['CentralLogging'] = __DIR__ . '/i18n';
