@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mailman"
+			"Mailman",
+			"Facenapalm"
 		]
 	},
-	"centrallogging-desc": "Предоставляет возможность ведения журналов на центральной вики"
+	"centrallogging-desc": "Предоставляет возможность ведения журналов на центральной вики",
+	"centrallogging-queued-count": "Записи журналов в очереди"
 }
