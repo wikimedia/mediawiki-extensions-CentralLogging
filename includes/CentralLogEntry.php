@@ -75,7 +75,7 @@ class CentralLogEntry extends ManualLogEntry {
 		$this->shouldWePublish = $publish;
 		$this->publishTo = $to;
 		$this->setTimestamp( wfTimestampNow() ); // Job queue might be delayed so set the TS now
-		$params = array( 'data' => $this );
+		$params = [ 'data' => $this ];
 		$job = new CentralLogJob( $this->getTarget(), $params );
 		JobQueueGroup::singleton( $dbname )->push( $job );
 		return 0; // Better than nothing?
@@ -89,4 +89,3 @@ class CentralLogEntry extends ManualLogEntry {
 		return $this->publishTo;
 	}
 }
-

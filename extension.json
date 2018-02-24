@@ -10,7 +10,7 @@
 		"MediaWiki": ">= 1.29.0"
 	},
 	"JobClasses": {
-		"centrallogJob": "CentralLogJob"
+		"centrallogJob": "includes/CentralLogJob"
 	},
 	"MessagesDirs": {
 		"CentralLogging": [
@@ -18,9 +18,10 @@
 		]
 	},
 	"AutoloadClasses": {
-		"CentralLogEntry": "CentralLogEntry.php",
-		"CentralLogFormatter": "CentralLogFormatter.php",
-		"CentralLogJob": "CentralLogJob.php"
+		"CentralLogEntry": "includes/CentralLogEntry.php",
+		"CentralLogFormatter": "includes/CentralLogFormatter.php",
+		"CentralLogJob": "includes/CentralLogJob.php",
+		"CentralLoggingHooks": "includes/CentralLoggingHooks.php"
 	},
 	"config": {
 		"CentralWiki": {

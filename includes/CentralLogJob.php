@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Log formatter to account for foreign links
+ * Job class which submits jobs when run
  *
  * This file is part of Extension:CentralLogging
  *
@@ -25,42 +25,26 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class CentralLogFormatter extends LogFormatter {
-	/**
-	 * Uses WikiMap to make a foreign link based on the dbname
-	 * If the entry was local, use the normal method
-	 * @param Title $title
-	 * @param array $parameters
-	 * @return String
-	 */
-	protected function makePageLink( Title $title = null, $parameters = array() ) {
-		global $wgDBname;
-		$entry = $this->entry;
-		$params = $entry->getParameters();
-		$dbname = $params['dbname'];
-		if ( $wgDBname == $dbname ) { // Viewing on the same wiki it was inserted in
-			return parent::makePageLink( $title, $parameters );
-		} else {
-			return WikiMap::makeForeignLink( $dbname, $title->getPartialURL() );
-		}
-	}
+class CentralLogJob extends Job {
 
 	/**
-	 * Uses WikiMap to make a foreign link based on the dbname
-	 * If the entry was local, use the normal method
-	 * @param User $user
-	 * @return String
+	 * @param Title $title
+	 * @param array $params
 	 */
-	function makeUserLink( User $user ) {
-		global $wgDBname;
-		$entry = $this->entry;
-		$params = $entry->getParameters();
-		$dbname = $params['dbname'];
-		if ( $wgDBname == $dbname ) { // Viewing on the same wiki it was inserted in
-			return parent::makeUserLink( $user );
-		} else {
-			return WikiMap::foreignUserLink( $dbname, $user->getName() );
+	public function __construct( $title, $params ) {
+		parent::__construct( 'centrallogJob', $title, $params );
+	}
+
+	public function run() {
+		/**
+		 * @var $entry CentralLogEntry
+		 */
+		$entry = $this->params['data'];
+		$logId = $entry->insert();
+		if ( $entry->shouldWePublishEntry() ) {
+			$entry->publish( $logId, $entry->publishEntryTo() );
 		}
+
+		return true;
 	}
 }
-

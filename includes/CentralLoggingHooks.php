@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Job class which submits jobs when run
+ * Hoooooooks!
  *
  * This file is part of Extension:CentralLogging
  *
@@ -25,30 +25,25 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class CentralLogJob extends Job {
+class CentralLoggingHooks {
 
 	/**
-	 * @param Title $title
-	 * @param array $params
-	 * @param int $id
+	 * Add number of queued entries to Special:Statistics
+	 * @param array &$extraStats
+	 * @return bool
 	 */
-	public function __construct( $title, $params, $id = 0 ) {
-		parent::__construct( 'centrallogJob', $title, $params, $id );
-	}
+	public static function onSpecialStatsAddExtra( &$extraStats ) {
+		// from runJobs.php --group
+		$group = JobQueueGroup::singleton();
+		$queue = $group->get( 'centrallogJob' );
+		$pending = $queue->getSize();
+		$claimed = $queue->getAcquiredCount();
+		$abandoned = $queue->getAbandonedCount();
+		$active = ( $claimed - $abandoned );
 
-	public function run() {
-		/**
-		 * @var $entry CentralLogEntry
-		 */
-		$entry = $this->params['data'];
-		$logId = $entry->insert();
-		if ( $entry->shouldWePublishEntry() ) {
-			$entry->publish( $logId, $entry->publishEntryTo() );
-		}
+		$queued = $active + $pending;
+		$extraStats['centrallogging-queued-count'] = $queued;
 
 		return true;
 	}
 }
-
-
-
