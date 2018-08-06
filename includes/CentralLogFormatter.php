@@ -29,7 +29,7 @@ class CentralLogFormatter extends LogFormatter {
 	/**
 	 * Uses WikiMap to make a foreign link based on the dbname
 	 * If the entry was local, use the normal method
-	 * @param Title $title
+	 * @param Title|null $title
 	 * @param array $parameters
 	 * @param string|null $html
 	 * @return String

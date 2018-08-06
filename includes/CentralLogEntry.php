@@ -51,7 +51,8 @@ class CentralLogEntry extends ManualLogEntry {
 	/**
 	 * Queues the log entry into the job queue. If the central wiki is
 	 * the same as our current wiki, we will insert the log entry normally
-	 * @param string $dbname Database name to insert into, will fallback on $wgCentralWiki if not set
+	 * @param string|null $dbname Database name to insert into,
+	 *   will fallback on $wgCentralWiki if not set
 	 * @param bool $publish Whether to call ManualLogEntry::publish afterwards
 	 * @param string $to The $to parameter in ManualLogEntry::publish
 	 * @return int
