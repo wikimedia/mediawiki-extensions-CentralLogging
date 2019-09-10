@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Railfail536"
+			"Railfail536",
+			"Rail"
 		]
 	},
 	"centrallogging-desc": "Umożliwia rozszerzeniom tworzenie wpisów rejestru na centralnej wiki",
