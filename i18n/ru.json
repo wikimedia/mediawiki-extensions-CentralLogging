@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mailman",
-			"Facenapalm"
+			"Facenapalm",
+			"Mailman"
 		]
 	},
 	"centrallogging-desc": "Предоставляет возможность ведения журналов на центральной вики",
