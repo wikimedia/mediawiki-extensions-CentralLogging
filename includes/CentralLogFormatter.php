@@ -32,7 +32,7 @@ class CentralLogFormatter extends LogFormatter {
 	 * @param Title|null $title
 	 * @param array $parameters
 	 * @param string|null $html
-	 * @return String
+	 * @return string
 	 */
 	protected function makePageLink( Title $title = null, $parameters = [], $html = null ) {
 		global $wgDBname;
@@ -51,7 +51,7 @@ class CentralLogFormatter extends LogFormatter {
 	 * If the entry was local, use the normal method
 	 * @param User $user
 	 * @param int $toolFlags
-	 * @return String
+	 * @return string
 	 */
 	function makeUserLink( User $user, $toolFlags = 0 ) {
 		global $wgDBname;
