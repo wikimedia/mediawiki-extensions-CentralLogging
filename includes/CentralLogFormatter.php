@@ -25,6 +25,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+use MediaWiki\User\UserIdentity;
+
 class CentralLogFormatter extends LogFormatter {
 	/**
 	 * Uses WikiMap to make a foreign link based on the dbname
@@ -49,11 +51,11 @@ class CentralLogFormatter extends LogFormatter {
 	/**
 	 * Uses WikiMap to make a foreign link based on the dbname
 	 * If the entry was local, use the normal method
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param int $toolFlags
 	 * @return string
 	 */
-	function makeUserLink( User $user, $toolFlags = 0 ) {
+	protected function makeUserLink( UserIdentity $user, $toolFlags = 0 ) {
 		global $wgDBname;
 		$entry = $this->entry;
 		$params = $entry->getParameters();
