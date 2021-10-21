@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dgstranz"
+			"Dgstranz",
+			"Jakeukalane"
 		]
 	},
-	"centrallogging-desc": "Permite a las extensiones crear entradas de registro en un wiki central",
+	"centrallogging-desc": "Permite a las extensiones crear entradas de registro en una wiki central",
 	"centrallogging-queued-count": "Entradas de registro en la cola"
 }
