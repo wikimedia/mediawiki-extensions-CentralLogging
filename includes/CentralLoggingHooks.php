@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Hoooooooks!
  *
@@ -34,7 +36,12 @@ class CentralLoggingHooks {
 	 */
 	public static function onSpecialStatsAddExtra( &$extraStats ) {
 		// from runJobs.php --group
-		$group = JobQueueGroup::singleton();
+		if ( method_exists( MediaWikiServices::class, 'getJobQueueGroup' ) ) {
+			// MW 1.37+
+			$group = MediaWikiServices::getInstance()->getJobQueueGroup();
+		} else {
+			$group = JobQueueGroup::singleton();
+		}
 		$queue = $group->get( 'centrallogJob' );
 		$pending = $queue->getSize();
 		$claimed = $queue->getAcquiredCount();
