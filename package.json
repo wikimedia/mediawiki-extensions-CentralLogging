@@ -1,4 +1,5 @@
 {
+	"name": "CentralLogging",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"
