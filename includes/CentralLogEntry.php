@@ -1,7 +1,4 @@
 <?php
-
-use MediaWiki\MediaWikiServices;
-
 /**
  * Our class to handle log entries
  * Extends a normal log entry for all other functionality
@@ -27,6 +24,7 @@ use MediaWiki\MediaWikiServices;
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+use MediaWiki\MediaWikiServices;
 
 class CentralLogEntry extends ManualLogEntry {
 
@@ -80,12 +78,7 @@ class CentralLogEntry extends ManualLogEntry {
 		$this->setTimestamp( wfTimestampNow() ); // Job queue might be delayed so set the TS now
 		$params = [ 'data' => $this ];
 		$job = new CentralLogJob( $this->getTarget(), $params );
-		if ( method_exists( MediaWikiServices::class, 'getJobQueueGroupFactory' ) ) {
-			// MW 1.37+
-			MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $dbname )->push( $job );
-		} else {
-			JobQueueGroup::singleton( $dbname )->push( $job );
-		}
+		MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $dbname )->push( $job );
 		return 0; // Better than nothing?
 	}
 

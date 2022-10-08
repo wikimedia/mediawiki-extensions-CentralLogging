@@ -1,7 +1,4 @@
 <?php
-
-use MediaWiki\MediaWikiServices;
-
 /**
  * Hoooooooks!
  *
@@ -26,6 +23,7 @@ use MediaWiki\MediaWikiServices;
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+use MediaWiki\MediaWikiServices;
 
 class CentralLoggingHooks {
 
@@ -36,12 +34,7 @@ class CentralLoggingHooks {
 	 */
 	public static function onSpecialStatsAddExtra( &$extraStats ) {
 		// from runJobs.php --group
-		if ( method_exists( MediaWikiServices::class, 'getJobQueueGroup' ) ) {
-			// MW 1.37+
-			$group = MediaWikiServices::getInstance()->getJobQueueGroup();
-		} else {
-			$group = JobQueueGroup::singleton();
-		}
+		$group = MediaWikiServices::getInstance()->getJobQueueGroup();
 		$queue = $group->get( 'centrallogJob' );
 		$pending = $queue->getSize();
 		$claimed = $queue->getAcquiredCount();
