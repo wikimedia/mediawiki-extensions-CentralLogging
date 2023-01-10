@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"centrallogging-desc": "Razširitvam omogoča ustvarjanje dnevniških zapisov v osrednjem vikiju",
+	"centrallogging-queued-count": "Dnevniški zapisi v čakalni vrsti"
+}
