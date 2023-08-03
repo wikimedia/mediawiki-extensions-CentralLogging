@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"centrallogging-desc": "Omogućuje dodacima stvaratidnevničke stavke na središnjem wikiju",
+	"centrallogging-queued-count": "Dnevničke stavke u redu"
+}
