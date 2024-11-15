@@ -36,7 +36,7 @@ class CentralLogFormatter extends LogFormatter {
 	 * @param string|null $html
 	 * @return string
 	 */
-	protected function makePageLink( Title $title = null, $parameters = [], $html = null ) {
+	protected function makePageLink( ?Title $title = null, $parameters = [], $html = null ) {
 		global $wgDBname;
 		$entry = $this->entry;
 		$params = $entry->getParameters();
