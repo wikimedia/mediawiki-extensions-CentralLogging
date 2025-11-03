@@ -25,6 +25,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+use MediaWiki\Title\Title;
+
 class CentralLogJob extends Job {
 
 	/**
