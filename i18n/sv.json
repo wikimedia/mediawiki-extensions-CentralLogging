@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Stefan2255"
+		]
+	},
+	"centrallogging-desc": "Tillåter tillägg att skapa loggposter på en central wiki",
+	"centrallogging-queued-count": "Köade loggposter"
+}
