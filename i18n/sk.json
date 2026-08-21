@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"centrallogging-desc": "Umožňuje rozšíreniam vytvárať záznamy na centrálnej wiki",
+	"centrallogging-queued-count": "Položky záznamu vo fronte"
+}
